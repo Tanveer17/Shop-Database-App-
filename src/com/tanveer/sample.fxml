@@ -1,0 +1,51 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.ToolBar?>
+<BorderPane fx:id="parent" fx:controller="com.tanveer.Controller"   xmlns:fx="http://javafx.com/fxml">
+        <top>
+            <ToolBar>
+                <HBox>
+                    <Button text="Add New Customer" onAction="#addNewCustomer"/>
+                </HBox>
+
+            </ToolBar>
+        </top>
+        <left>
+            <ListView fx:id="tables">
+
+
+            </ListView>
+        </left>
+        <center>
+            <HBox>
+            <StackPane HBox.hgrow="ALWAYS">
+                <TableView fx:id="customer"    >
+                </TableView>
+
+                <TableView fx:id="productType" >
+                </TableView>
+
+                <TableView fx:id="orderTable">
+                </TableView>
+
+                <TableView fx:id="product">
+
+                </TableView>
+
+                <TableView fx:id="sales">
+
+                </TableView>
+
+
+
+            </StackPane>
+            </HBox>
+
+        </center>
+</BorderPane>
+
+
