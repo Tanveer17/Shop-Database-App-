@@ -1,26 +1,19 @@
 package com.tanveer;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Optional;
 
 public class Main extends Application {
-
-    private String name;
-    private String passwrd;
-    boolean flag=false;
-    boolean outh = true;
+    private boolean flag=false;
+    private boolean outh = true;
 
 
     @Override
@@ -36,7 +29,7 @@ public class Main extends Application {
 
         }
         catch(IOException e){
-            System.out.println(e);
+            e.printStackTrace();
             return;
         }
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
@@ -58,6 +51,9 @@ public class Main extends Application {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+            else if(result.isPresent() && result.get()==ButtonType.CANCEL){
+                outh = false;
             }
         }
 

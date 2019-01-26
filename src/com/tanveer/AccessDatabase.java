@@ -3,27 +3,27 @@ package com.tanveer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
-
 import java.sql.*;
-import java.time.LocalDate;
+
 
 public class AccessDatabase {
     private Connection connection;
-    private ObservableList<String> tables;
     private static AccessDatabase instance = new AccessDatabase();
 
 
-    public static AccessDatabase getInstance() {
-        System.out.println("ASd");
+    public static AccessDatabase getInstance()
+    {
         return instance;
 
     }
 
-    public void setClass(String driverClass) throws Exception {
+    public void setClass(String driverClass) throws Exception
+    {
         Class.forName(driverClass);
     }
 
-    public boolean login(String userName, String password) {
+    public boolean login(String userName, String password)
+    {
         try {
             instance.connection = DriverManager.getConnection("jdbc:mysql://localhost/shop_app", userName, password);
             return true;
@@ -37,7 +37,9 @@ public class AccessDatabase {
         }
     }
 
-    public ObservableList<String> getTables() throws Exception {
+    public ObservableList<String> getTables() throws Exception
+    {
+        ObservableList<String> tables;
         DatabaseMetaData metaData = connection.getMetaData();
         Statement st = connection.createStatement();
         ResultSet rs1 = metaData.getTables(null, null, null, new String[]{"TABLE"});
@@ -53,7 +55,8 @@ public class AccessDatabase {
         return connection;
     }
 
-    public ObservableList<Customer> getCustomers() throws Exception {
+    public ObservableList<Customer> getCustomers() throws Exception
+    {
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery("SELECT * FROM customers");
         ObservableList<Customer> customers = FXCollections.observableArrayList();
@@ -68,7 +71,8 @@ public class AccessDatabase {
         return customers;
     }
 
-    public ObservableList<ProductType> getProductTypes() throws Exception {
+    public ObservableList<ProductType> getProductTypes() throws Exception
+    {
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery("SELECT * FROM product_types");
         ObservableList<ProductType> productTypes = FXCollections.observableArrayList();
@@ -80,7 +84,8 @@ public class AccessDatabase {
         return productTypes;
     }
 
-    public ObservableList<Product> getProducts() throws Exception {
+    public ObservableList<Product> getProducts() throws Exception
+    {
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery("SELECT products.id,products.name,product_types.name,price,instock FROM products INNER JOIN product_types ON products.product_type_id = product_types.id");
         ObservableList<Product> products = FXCollections.observableArrayList();
@@ -97,14 +102,16 @@ public class AccessDatabase {
         return products;
     }
 
-    public ObservableList<Order> getOrders() throws Exception {
+    public ObservableList<Order> getOrders() throws Exception
+    {
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery("SELECT orders.id, quantity,date,CONCAT(customers.first_name,' ' ,customers.last_name) AS 'customer_name', products.name, product_types.name, quantity*products.price AS 'price' " +
                 "FROM orders INNER JOIN products ON orders.product_id=products.id " +
                 "INNER JOIN customers ON orders.customer_id=customers.id " +
                 "INNER JOIN product_types ON product_types.id=products.product_type_id");
         ObservableList<Order> orders = FXCollections.observableArrayList();
-        while (rs.next()) {
+        while (rs.next())
+        {
             int id = rs.getInt("orders.id");
             int quantity = rs.getInt("quantity");
             Date date = rs.getDate("date");
@@ -118,9 +125,11 @@ public class AccessDatabase {
         return orders;
     }
 
-    public ObservableList<Sale> getSales() {
+    public ObservableList<Sale> getSales()
+    {
         ObservableList sales = FXCollections.observableArrayList();
-        try {
+        try
+        {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery("SELECT sales.id,CONCAT(customers.first_name,' ',customers.last_name) AS 'customer_name',products.name,product_types.name,sales.date,sales.quantity" +
                     " FROM sales INNER JOIN customers ON sales.customer_id = customers.id" +
@@ -133,18 +142,18 @@ public class AccessDatabase {
                 String customer = rs.getString("customer_name");
                 String product = rs.getString("products.name");
                 String type = rs.getString("product_types.name");
-                Date date = rs.getDate("saless.date");
-                int quantity = rs.getInt("sales.quanity");
+                Date date = rs.getDate("sales.date");
+                int quantity = rs.getInt("sales.quantity");
 
                 sales.add(new Sale(id, customer, product, type, date, quantity));
-                return sales;
-
             }
-        } catch (SQLException s) {
+            return sales;
+        } catch (SQLException s)
+        {
             s.printStackTrace();
 
         }
-        return sales;
+        return null;
 
     }
 }

@@ -2,7 +2,6 @@ package com.tanveer;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,7 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 
-import java.io.IOException;;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Optional;
 
@@ -78,7 +77,7 @@ public class Controller {
     }
 
 
-    public void showCustomerTable() throws Exception{
+    private void showCustomerTable() throws Exception{
 
             TableColumn<Customer, IntegerProperty> idColumn = new TableColumn<>("ID");
             idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -95,7 +94,7 @@ public class Controller {
             customer.getItems().addAll(AccessDatabase.getInstance().getCustomers());
 
     }
-    public void makeProductTypeTable()throws Exception{
+    private void makeProductTypeTable()throws Exception{
         TableColumn<ProductType, IntegerProperty> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<ProductType, StringProperty> nameColumn = new TableColumn<>("Name");
@@ -104,7 +103,7 @@ public class Controller {
         productType.getItems().addAll(AccessDatabase.getInstance().getProductTypes());
     }
 
-    public void makeProductTable() throws Exception{
+    private void makeProductTable() throws Exception{
         TableColumn<Product, IntegerProperty> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<Product, StringProperty> nameColumn = new TableColumn<>("Name");
@@ -120,7 +119,7 @@ public class Controller {
         product.getItems().addAll(AccessDatabase.getInstance().getProducts());
     }
 
-    public void makeOrders() throws Exception{
+    private void makeOrders() throws Exception{
         TableColumn<Order, IntegerProperty> idColumn = new TableColumn<>("Order ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<Order, IntegerProperty> quantityColumn = new TableColumn<>("Quantity");
@@ -140,7 +139,7 @@ public class Controller {
         orderTable.getItems().addAll(AccessDatabase.getInstance().getOrders());
     }
 
-    public void makeSalesTable(){
+    private void makeSalesTable(){
         TableColumn<Sale, IntegerProperty> idColumn = new TableColumn<>("Order ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<Sale, StringProperty> customer_nameColumn = new TableColumn<>("Customer Name");
@@ -171,15 +170,15 @@ public class Controller {
 
         }
         catch(IOException e){
-            System.out.println(e);
+            e.printStackTrace();
             return;
         }
+        DialogController dialogController = fxmlLoader.getController();
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
         Optional<ButtonType> result = dialog.showAndWait();
         if(result.isPresent()&&result.get() ==ButtonType.OK){
             System.out.println("if block");
-            DialogController dialogController = fxmlLoader.getController();
             dialogController.processData();
             for(int i =0;i<customer.getItems().size();i++){
                 customer.getColumns().clear();
@@ -187,13 +186,96 @@ public class Controller {
             }
             showCustomerTable();
         }
+        System.out.println("end of customr add");
 
 
     }
 
-    public BorderPane getParent() {
-        return parent;
+    @FXML
+    public void makeSale() throws Exception{
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(parent.getScene().getWindow());
+        dialog.setHeaderText("this is used to add new Customer");
+        dialog.setTitle("Add new Todo item");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("saleDialog.fxml"));
+        try{
+
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+
+        }
+        catch(IOException e){
+            e.printStackTrace();
+            return;
+        }
+        SaleController dialogController = fxmlLoader.getController();
+        dialogController.setFirstName();
+        dialogController.setLastName();
+        dialogController.setProductName();
+        dialogController.setProductType();
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        Optional<ButtonType> result = dialog.showAndWait();
+
+
+        if( result.isPresent()&&result.get() ==ButtonType.OK){
+            dialogController.processData();
+            for(int i =0;i<sales.getItems().size();i++){
+                sales.getColumns().clear();
+                sales.getItems().clear();
+            }
+            for(int i =0;i<product.getItems().size();i++){
+                product.getColumns().clear();
+                product.getItems().clear();
+            }
+
+            makeSalesTable();
+            makeProductTable();
+
+        }
+
+
     }
+
+    @FXML
+    public void addProductType(){
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(parent.getScene().getWindow());
+        dialog.setHeaderText("This dialog is used to add a new Product Type");
+        dialog.setTitle("Add new Product Type");
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("productTypeDialog.fxml"));
+        try{
+           dialog.getDialogPane().setContent(fxmlLoader.load());
+        }
+        catch(IOException i){
+            i.printStackTrace();
+        }
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        Optional<ButtonType> result= dialog.showAndWait();
+
+        if(result.isPresent() && result.get() == ButtonType.OK){
+            ProductTypeDialog productTypeDialog = fxmlLoader.getController();
+            productTypeDialog.processData();
+            for(int i = 0; i<productType.getItems().size();i++){
+                productType.getItems().clear();
+                productType.getColumns().clear();
+            }
+            try {
+                makeProductTypeTable();
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+
+
+
+    }
+
 
 }
 

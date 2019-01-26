@@ -5,20 +5,25 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.ToolBar?>
-<BorderPane fx:id="parent" fx:controller="com.tanveer.Controller"   xmlns:fx="http://javafx.com/fxml">
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane fx:id="parent" fx:controller="com.tanveer.Controller" xmlns:fx="http://javafx.com/fxml">
         <top>
-            <ToolBar>
-                <HBox>
-                    <Button text="Add New Customer" onAction="#addNewCustomer"/>
+            <ToolBar >
+                <HBox spacing="10" >
+                    <Button text="Make a Sale" onAction="#makeSale"/>
                 </HBox>
 
             </ToolBar>
         </top>
         <left>
-            <ListView fx:id="tables" onMouseClicked="#onSelect" >
+            <VBox>
+                 <ListView fx:id="tables" VBox.vgrow="NEVER">
 
 
-            </ListView>
+                 </ListView>
+                <Button text="ashxksn" VBox.vgrow="ALWAYS"/>
+            </VBox>
         </left>
         <center>
             <HBox>
@@ -46,6 +51,15 @@
             </HBox>
 
         </center>
+    <bottom>
+        <ToolBar >
+            <HBox spacing="10" >
+                <Button text="Add New Customer" onAction="#addNewCustomer"/>
+                <Button text="Add Product Type" onAction="#addProductType"/>
+            </HBox>
+
+        </ToolBar>
+    </bottom>
 </BorderPane>
 
 

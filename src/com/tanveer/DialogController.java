@@ -20,7 +20,6 @@ public class DialogController {
     private TextField email;
 
     public void processData()throws Exception{
-        String query = "INSERT INTO customers(id,first_name,last_name,phone_number,email) Values(?,?,?,?,?)";
         String fName = firstName.getText();
         int iD=0;
         if(!id.getText().isEmpty()) {
@@ -34,18 +33,19 @@ public class DialogController {
 
 
         fxmlLoader.setLocation(getClass().getResource("sample.fxml"));
-        Parent root = fxmlLoader.load();
-        Controller controller = fxmlLoader.getController();
+        String query = "INSERT INTO customers(id,first_name,last_name,phone_number,email) Values(?,?,?,?,?)";
         String query2 = "INSERT INTO customers(first_name,last_name,phone_number,email) Values(?,?,?,?)";
 
         PreparedStatement preparedStatement;
-        if(this.id.getText().isEmpty()){
+        if(iD==0){
             try {
+                System.out.println("id");
                 preparedStatement = AccessDatabase.getInstance().getConnection().prepareStatement(query2);
                 preparedStatement.setString(1,fName);
                 preparedStatement.setString(2,lName);
                 preparedStatement.setString(3,pNumber);
                 preparedStatement.setString(4,eMail);
+                preparedStatement.execute();
             }
             catch(Exception e){
                 System.out.println(e);
