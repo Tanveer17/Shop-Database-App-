@@ -1,4 +1,4 @@
-package com.tanveer;
+package com.tanveer.entities;
 
 import javafx.beans.property.*;
 

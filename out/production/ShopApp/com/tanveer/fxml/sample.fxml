@@ -22,7 +22,6 @@
 
 
                  </ListView>
-                <Button text="ashxksn" VBox.vgrow="ALWAYS"/>
             </VBox>
         </left>
         <center>

@@ -6,7 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import java.lang.String?>
 <?import javafx.scene.control.DatePicker?>
-<DialogPane fx:controller="com.tanveer.SaleController"
+<DialogPane fx:controller="com.tanveer.DialogControllers.SaleController"
 
             xmlns:fx="http://javafx.com/fxml">
     <content>

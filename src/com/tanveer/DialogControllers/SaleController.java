@@ -1,5 +1,6 @@
-package com.tanveer;
+package com.tanveer.DialogControllers;
 
+import com.tanveer.AccessDatabase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

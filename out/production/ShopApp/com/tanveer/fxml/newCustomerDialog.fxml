@@ -2,7 +2,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<DialogPane  fx:controller="com.tanveer.DialogController"
+<DialogPane  fx:controller="com.tanveer.DialogControllers.CustomerDialogController"
 
             xmlns:fx="http://javafx.com/fxml">
     <content>

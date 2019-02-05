@@ -1,5 +1,6 @@
 package com.tanveer;
 
+import com.tanveer.DialogControllers.LoginController;
 import javafx.application.Application;
 
 import javafx.fxml.FXMLLoader;
@@ -22,7 +23,7 @@ public class Main extends Application {
         dialog.setHeaderText("this is used to add new Customer");
         dialog.setTitle("Add new Todo item");
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("login.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("fxml/login.fxml"));
         try{
             System.out.println("couldnt load the dialogue");
             dialog.getDialogPane().setContent(fxmlLoader.load());
@@ -58,7 +59,7 @@ public class Main extends Application {
         }
 
         if(flag){
-            Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("fxml/sample.fxml"));
             primaryStage.setTitle("Shop App");
             primaryStage.setScene(new Scene(root,900,400));
             primaryStage.show();

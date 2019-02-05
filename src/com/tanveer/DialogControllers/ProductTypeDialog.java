@@ -1,5 +1,6 @@
-package com.tanveer;
+package com.tanveer.DialogControllers;
 
+import com.tanveer.AccessDatabase;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -13,7 +14,7 @@ public class ProductTypeDialog {
     @FXML
     private TextField name;
 
-     void processData(){
+    public void processData(){
         int id = -1;
         if(!this.id.getText().isEmpty()){
             id = Integer.parseInt(this.id.getText());

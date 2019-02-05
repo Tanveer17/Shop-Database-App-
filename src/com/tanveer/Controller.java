@@ -1,5 +1,9 @@
 package com.tanveer;
 
+import com.tanveer.DialogControllers.CustomerDialogController;
+import com.tanveer.DialogControllers.ProductTypeDialog;
+import com.tanveer.DialogControllers.SaleController;
+import com.tanveer.entities.*;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
@@ -163,7 +167,7 @@ public class Controller {
         dialog.setHeaderText("this is used to add new Customer");
         dialog.setTitle("Add new Todo item");
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("newCustomerDialog.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("fxml/newCustomerDialog.fxml"));
         try{
             System.out.println("couldnt load the dialogue");
             dialog.getDialogPane().setContent(fxmlLoader.load());
@@ -173,13 +177,13 @@ public class Controller {
             e.printStackTrace();
             return;
         }
-        DialogController dialogController = fxmlLoader.getController();
+        CustomerDialogController customerDialogController = fxmlLoader.getController();
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
         Optional<ButtonType> result = dialog.showAndWait();
         if(result.isPresent()&&result.get() ==ButtonType.OK){
             System.out.println("if block");
-            dialogController.processData();
+            customerDialogController.processData();
             for(int i =0;i<customer.getItems().size();i++){
                 customer.getColumns().clear();
                 customer.getItems().clear();
@@ -198,7 +202,7 @@ public class Controller {
         dialog.setHeaderText("this is used to add new Customer");
         dialog.setTitle("Add new Todo item");
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("saleDialog.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("fxml/saleDialog.fxml"));
         try{
 
             dialog.getDialogPane().setContent(fxmlLoader.load());
@@ -246,7 +250,7 @@ public class Controller {
         dialog.setTitle("Add new Product Type");
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("productTypeDialog.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("fxml/productTypeDialog.fxml"));
         try{
            dialog.getDialogPane().setContent(fxmlLoader.load());
         }

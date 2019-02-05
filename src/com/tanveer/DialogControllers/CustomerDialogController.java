@@ -1,5 +1,6 @@
-package com.tanveer;
+package com.tanveer.DialogControllers;
 
+import com.tanveer.AccessDatabase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,7 +8,7 @@ import javafx.scene.control.TextField;
 import java.sql.PreparedStatement;
 ;
 
-public class DialogController {
+public class CustomerDialogController {
     @FXML
     private TextField id;
     @FXML
