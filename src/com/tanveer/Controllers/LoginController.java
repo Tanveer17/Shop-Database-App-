@@ -1,4 +1,4 @@
-package com.tanveer.DialogControllers;
+package com.tanveer.Controllers;
 
 import com.tanveer.AccessDatabase;
 import javafx.fxml.FXML;

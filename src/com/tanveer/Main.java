@@ -1,6 +1,6 @@
 package com.tanveer;
 
-import com.tanveer.DialogControllers.LoginController;
+import com.tanveer.Controllers.LoginController;
 import javafx.application.Application;
 
 import javafx.fxml.FXMLLoader;
@@ -20,26 +20,28 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setHeaderText("this is used to add new Customer");
-        dialog.setTitle("Add new Todo item");
+        dialog.setHeaderText("Enter User Name and Password");
+
+
+        dialog.setTitle("Log in page");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("fxml/login.fxml"));
         try{
-            System.out.println("couldnt load the dialogue");
             dialog.getDialogPane().setContent(fxmlLoader.load());
-
         }
+
+
         catch(IOException e){
             e.printStackTrace();
             return;
         }
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.NEXT);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
 
 
         while(outh) {
             Optional<ButtonType> result = dialog.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
+            if (result.isPresent() && result.get() == ButtonType.NEXT) {
 
                 try {
                     AccessDatabase.getInstance().setClass("com.mysql.jdbc.Driver");
@@ -61,12 +63,9 @@ public class Main extends Application {
         if(flag){
             Parent root = FXMLLoader.load(getClass().getResource("fxml/sample.fxml"));
             primaryStage.setTitle("Shop App");
-            primaryStage.setScene(new Scene(root,900,400));
+            primaryStage.setScene(new Scene(root,1000,400));
             primaryStage.show();
         }
-
-
-
     }
 
 

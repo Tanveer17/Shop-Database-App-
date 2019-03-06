@@ -1,16 +1,13 @@
-package com.tanveer.DialogControllers;
+package com.tanveer.Controllers;
 
 import com.tanveer.AccessDatabase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import java.sql.PreparedStatement;
 ;
 
 public class CustomerDialogController {
-    @FXML
-    private TextField id;
     @FXML
     private TextField firstName;
     @FXML
@@ -22,25 +19,15 @@ public class CustomerDialogController {
 
     public void processData()throws Exception{
         String fName = firstName.getText();
-        int iD=0;
-        if(!id.getText().isEmpty()) {
-            iD = Integer.parseInt(id.getText());
-        }
         String lName  = lastName.getText();
         String pNumber = phoneNumber.getText();
         String eMail = email.getText();
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-
-
-        fxmlLoader.setLocation(getClass().getResource("sample.fxml"));
-        String query = "INSERT INTO customers(id,first_name,last_name,phone_number,email) Values(?,?,?,?,?)";
         String query2 = "INSERT INTO customers(first_name,last_name,phone_number,email) Values(?,?,?,?)";
 
         PreparedStatement preparedStatement;
-        if(iD==0){
+
             try {
-                System.out.println("id");
                 preparedStatement = AccessDatabase.getInstance().getConnection().prepareStatement(query2);
                 preparedStatement.setString(1,fName);
                 preparedStatement.setString(2,lName);
@@ -53,26 +40,10 @@ public class CustomerDialogController {
 
             }
 
-        }
-        else {
-            try {
-                System.out.println("prepared");
 
-                preparedStatement = AccessDatabase.getInstance().getConnection().prepareStatement(query);
-                preparedStatement.setInt(1,iD);
-                preparedStatement.setString(2,fName);
-                preparedStatement.setString(3,lName);
-                preparedStatement.setString(4,pNumber);
-                preparedStatement.setString(5,eMail);
-                preparedStatement.execute();
-            }
-            catch(Exception e){
-                System.out.println(e);
-
-            }
 
         }
 
 
     }
-}
+

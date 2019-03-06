@@ -34,8 +34,8 @@ public class AccessDatabase {
             invalid.setContentText("please enter the right password or user Name");
             invalid.showAndWait();
             return false;
-
         }
+
     }
 
     public ObservableList<String> getTables() throws Exception
@@ -47,8 +47,11 @@ public class AccessDatabase {
         ;
         tables = FXCollections.observableArrayList();
         while (rs1.next()) {
-            tables.addAll(rs1.getString("TABLE_NAME"));
+            tables.addAll(rs1.getString("TABLE_NAME").toUpperCase());
         }
+//        for(int i = 0;i<tables.size();i++){
+//            tables.get(i).toUpperCase();
+//        }
         return tables;
     }
 

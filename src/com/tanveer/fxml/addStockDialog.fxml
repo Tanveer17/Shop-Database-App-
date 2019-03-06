@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<DialogPane fx:controller="com.tanveer.Controllers.AddStockController"
+
+             xmlns:fx="http://javafx.com/fxml">
+<content>
+    <GridPane vgap="10" hgap="10">
+
+        <Label text="Product" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="product" GridPane.rowIndex="0" GridPane.columnIndex="1" editable="true">
+            <value>
+                <String fx:value="Product"/>
+            </value>
+        </ComboBox>
+        <Label text="Enter Stock" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="quantity" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+
+
+
+    </GridPane>
+</content>
+</DialogPane>

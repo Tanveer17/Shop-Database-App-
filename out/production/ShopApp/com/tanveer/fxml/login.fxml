@@ -4,12 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.PasswordField?>
-<DialogPane fx:controller="com.tanveer.DialogControllers.LoginController"
+<DialogPane fx:controller="com.tanveer.Controllers.LoginController"
 
-            xmlns:fx="http://javafx.com/fxml">
+            xmlns:fx="http://javafx.com/fxml" style="-fx-background-color:gray" >
     <content>
         <GridPane vgap="10" hgap="10">
-            <Label text ="User Name" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <Label text ="User Name" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-textfill:white"/>
             <TextField fx:id="userName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
             <Label text ="Password" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
             <PasswordField fx:id="password" GridPane.rowIndex="1" GridPane.columnIndex="1"/>

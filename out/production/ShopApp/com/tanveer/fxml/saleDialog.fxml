@@ -6,42 +6,25 @@
 <?import javafx.scene.control.ComboBox?>
 <?import java.lang.String?>
 <?import javafx.scene.control.DatePicker?>
-<DialogPane fx:controller="com.tanveer.DialogControllers.SaleController"
+<DialogPane fx:controller="com.tanveer.Controllers.SaleController"
 
             xmlns:fx="http://javafx.com/fxml">
     <content>
         <GridPane vgap="10" hgap="10">
-            <Label text="ID" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-            <TextField fx:id="id" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-            <Label text="First Name" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-            <ComboBox fx:id="firstName" GridPane.rowIndex="1" GridPane.columnIndex="1" editable="true">
+            <Label text="Customer Name" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="name" GridPane.rowIndex="1" GridPane.columnIndex="1" editable="true">
                 <value>
-                    <String fx:value="First Name"/>
+                    <String fx:value="Name"/>
                 </value>
             </ComboBox>
-            <Label text="Last Name" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-            <ComboBox fx:id="lastName" GridPane.rowIndex="2" GridPane.columnIndex="1" editable="true">
-                <value>
-                    <String fx:value="Last Name"/>
-                </value>
-            </ComboBox>
-
-            <Label text="Product" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-            <ComboBox fx:id="product" GridPane.rowIndex="3" GridPane.columnIndex="1" editable="true">
+            <Label text="Product" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="product" GridPane.rowIndex="2" GridPane.columnIndex="1" editable="true">
                 <value>
                     <String fx:value="Product"/>
                 </value>
             </ComboBox>
-            <Label text="Product Type" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-            <ComboBox fx:id="productType" GridPane.rowIndex="4" GridPane.columnIndex="1" editable="true">
-                <value>
-                    <String fx:value="Product Type"/>
-                </value>
-            </ComboBox>
-            <Label text="Date" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-            <DatePicker fx:id="date" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-            <Label text="Quantity" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-            <TextField fx:id="quantity" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+            <Label text="Quantity" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <TextField fx:id="quantity" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
 
 
 

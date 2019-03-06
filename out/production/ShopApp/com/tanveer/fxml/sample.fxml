@@ -7,11 +7,17 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.layout.VBox?>
-<BorderPane fx:id="parent" fx:controller="com.tanveer.Controller" xmlns:fx="http://javafx.com/fxml">
+<BorderPane fx:id="parent" fx:controller="com.tanveer.Controller" xmlns:fx="http://javafx.com/fxml" >
         <top>
-            <ToolBar >
-                <HBox spacing="10" >
-                    <Button text="Make a Sale" onAction="#makeSale"/>
+            <ToolBar style="-fx-background-color:brown">
+                <HBox spacing="45" style="-fx-background-color:brown">
+                    <Button text="Sell an Item" onAction="#makeSale" style="-fx-background-color:blue; -fx-text-fill:white"/>
+                    <Button text="Add New Customer" onAction="#addNewCustomer" style="-fx-background-color:blue; -fx-text-fill:white"/>
+                    <Button text="Add Product" onAction="#addProduct" style="-fx-background-color:blue; -fx-text-fill:white"/>
+                    <Button text="Add Product Type" onAction="#addProductType" style="-fx-background-color:blue; -fx-text-fill:white"/>
+                    <Button text="Add Stock" onAction="#addStock" style="-fx-background-color:blue; -fx-text-fill:white"/>
+                    <Button text="Last Month Sale" onAction="#lastMonthSale" style="-fx-background-color:blue; -fx-text-fill:white"/>
+
                 </HBox>
 
             </ToolBar>
@@ -28,19 +34,34 @@
             <HBox>
             <StackPane HBox.hgrow="ALWAYS">
                 <TableView fx:id="customer"    >
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
                 </TableView>
 
                 <TableView fx:id="productType" >
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
                 </TableView>
 
                 <TableView fx:id="orderTable">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
                 </TableView>
 
                 <TableView fx:id="product">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
 
                 </TableView>
 
                 <TableView fx:id="sales">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
 
                 </TableView>
 
@@ -50,15 +71,8 @@
             </HBox>
 
         </center>
-    <bottom>
-        <ToolBar >
-            <HBox spacing="10" >
-                <Button text="Add New Customer" onAction="#addNewCustomer"/>
-                <Button text="Add Product Type" onAction="#addProductType"/>
-            </HBox>
 
-        </ToolBar>
-    </bottom>
+
 </BorderPane>
 
 
