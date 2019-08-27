@@ -9,6 +9,8 @@ import java.sql.*;
 
 public class AccessDatabase {
     private Connection connection;
+    private ObservableList<Customer> customers = FXCollections.observableArrayList();
+    private Statement statement;
     private static AccessDatabase instance = new AccessDatabase();
 
 
@@ -49,9 +51,6 @@ public class AccessDatabase {
         while (rs1.next()) {
             tables.addAll(rs1.getString("TABLE_NAME").toUpperCase());
         }
-//        for(int i = 0;i<tables.size();i++){
-//            tables.get(i).toUpperCase();
-//        }
         return tables;
     }
 
@@ -59,11 +58,11 @@ public class AccessDatabase {
         return connection;
     }
 
-    public ObservableList<Customer> getCustomers() throws Exception
+    public void makeCustomersList() throws Exception
     {
+        customers = FXCollections.observableArrayList();
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery("SELECT * FROM customers");
-        ObservableList<Customer> customers = FXCollections.observableArrayList();
         while (rs.next()) {
             int id = rs.getInt("id");
             String fname = rs.getString("first_name");
@@ -72,7 +71,7 @@ public class AccessDatabase {
             String email = rs.getString("email");
             customers.add(new Customer(id, fname, lname, pno, email));
         }
-        return customers;
+
     }
 
     public ObservableList<ProductType> getProductTypes() throws Exception
@@ -159,5 +158,9 @@ public class AccessDatabase {
         }
         return null;
 
+    }
+
+    public ObservableList<Customer> getCustomers() {
+        return customers;
     }
 }

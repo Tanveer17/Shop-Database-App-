@@ -21,43 +21,41 @@ public class AddStockController {
     @FXML
     private TextField quantity;
 
-    public void initialize(){
+    public void initialize() {
         setProduct();
     }
 
-    public void setProduct(){
+    public void setProduct() {
         ObservableList<String> productList = FXCollections.observableArrayList();
         try {
             Statement st = AccessDatabase.getInstance().getConnection().createStatement();
             ResultSet rs = st.executeQuery("SELECT name FROM products");
-            while(rs.next()){
+            while (rs.next()) {
                 String pName = rs.getString("name");
                 productList.add(pName);
 
             }
             product.setItems(productList);
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
     }
 
-    public void processData(){
+    public void processData() {
         int qua = Integer.parseInt(quantity.getText());
-        String prodct  = product.getSelectionModel().getSelectedItem().toString();
+        String prodct = product.getSelectionModel().getSelectedItem().toString();
         String query = "UPDATE products SET instock = instock +? WHERE name = ? ";
 
-    try {
-        PreparedStatement ps = AccessDatabase.getInstance().getConnection().prepareStatement(query);
-        ps.setInt(1,qua);
-        ps.setString(2,prodct);
-        ps.execute();
+        try {
+            PreparedStatement ps = AccessDatabase.getInstance().getConnection().prepareStatement(query);
+            ps.setInt(1, qua);
+            ps.setString(2, prodct);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-    catch (SQLException e){
-        e.printStackTrace();
-    }
-    }
-
 
 }
+

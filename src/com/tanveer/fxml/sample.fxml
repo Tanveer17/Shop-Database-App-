@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ProgressBar?>
 <BorderPane fx:id="parent" fx:controller="com.tanveer.Controller" xmlns:fx="http://javafx.com/fxml" >
         <top>
             <ToolBar style="-fx-background-color:brown">
@@ -65,12 +66,11 @@
 
                 </TableView>
 
-
-
             </StackPane>
-            </HBox>
 
+            </HBox>
         </center>
+
 
 
 </BorderPane>

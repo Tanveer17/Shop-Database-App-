@@ -7,6 +7,10 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ListChangeListener.Change;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -68,8 +72,16 @@ public class Controller {
         makeProductTable();
         makeSalesTable();
 
-        tables.setItems(AccessDatabase.getInstance().getTables());
-        customer.setVisible(false);
+        new Thread (() ->{
+            try {
+                tables.setItems(AccessDatabase.getInstance().getTables());
+            }
+            catch (Exception e){
+
+            }
+        }).start();
+
+       // customer.setVisible(false);
         productType.setVisible(false);
         product.setVisible(false);
         orderTable.setVisible(false);
@@ -81,8 +93,9 @@ public class Controller {
 
 
     private void showCustomerTable() throws Exception {
+        ObservableList<Customer> list;
 
-        TableColumn<Customer, IntegerProperty> idColumn = new TableColumn<>("ID");
+        TableColumn<Customer, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<Customer, StringProperty> fnameColumn = new TableColumn<>("First Name");
         fnameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -93,8 +106,31 @@ public class Controller {
         TableColumn<Customer, StringProperty> emailColumn = new TableColumn<>("Email");
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
+        AccessDatabase.getInstance().makeCustomersList();
+        list  = AccessDatabase.getInstance().getCustomers();
+
         customer.getColumns().addAll(idColumn, fnameColumn, lnameColumn, pnoColumn, emailColumn);
-        customer.getItems().addAll(AccessDatabase.getInstance().getCustomers());
+        customer.getItems().addAll(list);
+
+        list.addListener(new ListChangeListener() {
+            @Override
+            public void onChanged(ListChangeListener.Change change){
+            customer.getItems().add(list.get(list.size() - 1));
+        }
+        });
+
+
+//        task = new Task<ObservableList<Customer>>() {
+//            @Override
+//            protected ObservableList<Customer> call() throws Exception {
+//                System.out.println(Thread.currentThread());
+//                return AccessDatabase.getInstance().getCustomers();
+//            }
+//        };
+//
+//       customer.itemsProperty().bind(task.valueProperty());
+//       new Thread(task,"customer").start();
+
 
     }
 
@@ -141,6 +177,7 @@ public class Controller {
 
         orderTable.getColumns().addAll(idColumn, quantityColumn, dateColumn, customer_nameColumn, productColumn, typeColumn, priceColumn);
         orderTable.getItems().addAll(AccessDatabase.getInstance().getOrders());
+        System.out.println(Thread.currentThread());
     }
 
     private void makeSalesTable() {
@@ -160,7 +197,8 @@ public class Controller {
         sales.getColumns().addAll(idColumn, customer_nameColumn, productColumn, typeColumn, dateColumn, quantityColumn);
         sales.getItems().addAll(AccessDatabase.getInstance().getSales());
     }
-@FXML
+
+    @FXML
     public void addNewCustomer() throws Exception {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(parent.getScene().getWindow());
@@ -171,8 +209,7 @@ public class Controller {
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return;
         }
@@ -184,12 +221,12 @@ public class Controller {
             System.out.println("if block");
             customerDialogController.processData();
 
-            customer.getColumns().clear();
-            for (int i = 0; i < customer.getItems().size(); i++) {
-
-                customer.getItems().clear();
-            }
-            showCustomerTable();
+           // customer.getColumns().clear();
+//            for (int i = 0; i < customer.getItems().size(); i++) {
+//
+//                customer.getItems().clear();
+//            }
+//            showCustomerTable();
         }
         System.out.println("end of customr add");
 
@@ -317,8 +354,7 @@ public class Controller {
         }
         try {
             product.getItems().addAll(AccessDatabase.getInstance().getProducts());
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -326,7 +362,7 @@ public class Controller {
     }
 
     @FXML
-    public void addStock(){
+    public void addStock() {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(parent.getScene().getWindow());
         dialog.setHeaderText("Enter Product name And Quantity ");
@@ -344,20 +380,26 @@ public class Controller {
         Optional<ButtonType> result = dialog.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            AddStockController addStockController= fxmlLoader.getController();
-            addStockController.processData();
+            AddStockController addStockController = fxmlLoader.getController();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    addStockController.processData();
+
+
+                    for (int i = 0; i < product.getItems().size(); i++) {
+                        product.getItems().clear();
+                    }
+                    try {
+                        product.getItems().addAll(AccessDatabase.getInstance().getProducts());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }).start();
 
         }
-        for (int i = 0; i < product.getItems().size(); i++) {
-            product.getItems().clear();
-        }
-        try {
-            product.getItems().addAll(AccessDatabase.getInstance().getProducts());
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
     }
 }
 
