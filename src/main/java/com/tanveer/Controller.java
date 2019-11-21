@@ -193,7 +193,7 @@ public class Controller {
         dialog.setHeaderText("Enter the Customer Data");
         dialog.setTitle("Add new Customer");
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("fxml/newCustomerDialog.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/fxml/newCustomerDialog.fxml"));
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());
 
@@ -221,7 +221,7 @@ public class Controller {
         dialog.setHeaderText("This is used to Make sales");
         dialog.setTitle("Sale an item");
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("fxml/saleDialog.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/fxml/saleDialog.fxml"));
         try {
 
             dialog.getDialogPane().setContent(fxmlLoader.load());
@@ -262,7 +262,7 @@ public class Controller {
         dialog.setTitle("Add new Product Type");
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("fxml/productTypeDialog.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/fxml/productTypeDialog.fxml"));
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException i) {
@@ -293,7 +293,7 @@ public class Controller {
     @FXML
     public void lastMonthSale() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("fxml/lastmonthsale.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/lastmonthsale.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(root, 700, 400));
             LocalDate lastMonth = LocalDate.now().minusMonths(1);
@@ -314,7 +314,7 @@ public class Controller {
         dialog.setTitle("Add new Product");
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("fxml/addProductDialog.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/fxml/addProductDialog.fxml"));
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException i) {
@@ -350,7 +350,7 @@ public class Controller {
         dialog.setTitle("Add Quantity");
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("fxml/addStockDialog.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/fxml/addStockDialog.fxml"));
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException i) {

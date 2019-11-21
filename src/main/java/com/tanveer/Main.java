@@ -25,7 +25,7 @@ public class Main extends Application {
 
         dialog.setTitle("Log in page");
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("fxml/login.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/fxml/login.fxml"));
         try{
             dialog.getDialogPane().setContent(fxmlLoader.load());
         }
@@ -60,7 +60,7 @@ public class Main extends Application {
         }
 
         if(flag){
-            Parent root = FXMLLoader.load(getClass().getResource("fxml/sample.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/sample.fxml"));
             primaryStage.setTitle("Shop App");
             primaryStage.setScene(new Scene(root,1000,400));
             primaryStage.show();
