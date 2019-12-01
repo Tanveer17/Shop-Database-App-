@@ -299,7 +299,7 @@ public class Controller {
             LocalDate lastMonth = LocalDate.now().minusMonths(1);
             String month = lastMonth.getMonth().toString();
             int year = lastMonth.getYear();
-            stage.setTitle(month + " " + year + " Sales");
+            stage.setTitle(month + " " + year + " SALES");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
