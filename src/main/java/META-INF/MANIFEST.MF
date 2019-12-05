@@ -1,3 +1,9 @@
 Manifest-Version: 1.0
+Class-Path: javafx-base-11.0.2.jar javafx-graphics-11.0.2.jar javafx-c
+ ontrols-11.0.2-linux.jar mysql-connector-java-5.1.48.jar javafx-graph
+ ics-11.0.2-linux.jar mysql-connector-java-5.1.48.jar javafx-controls-
+ 11.0.2.jar javafx-base-11.0.2-linux.jar javafx-swt.jar javafx.web.jar
+  javafx.base.jar javafx.fxml.jar javafx.media.jar javafx.swing.jar ja
+ vafx.controls.jar javafx.graphics.jar
 Main-Class: com.tanveer.Main
-class-path: mysql_connector.jar
+
