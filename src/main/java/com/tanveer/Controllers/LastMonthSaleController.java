@@ -61,7 +61,7 @@ public class LastMonthSaleController {
                 String customer = rs.getString("customer_name");
                 String product = rs.getString("products.name");
                 String type = rs.getString("product_types.name");
-                java.sql.Date date = rs.getDate("sales.date");
+                java.sql.Date date = rs.getDate("sales.sale_date");
                 int quantity = rs.getInt("sales.quantity");
 
                 sales.add(new Sale(id, customer, product, type, date, quantity));
